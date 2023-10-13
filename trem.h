@@ -26,6 +26,9 @@ private:
    int y;           //posição Y do trem na tela
    int ID;          //ID do trem
    pthread_mutex_t *critic; // mutexes para cada zona critica
+
+   void lock(int n);
+   void unlock(int n);
 };
 
 #endif // TREM_H
