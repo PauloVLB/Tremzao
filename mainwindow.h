@@ -40,6 +40,8 @@ private:
     Trem *trem3;
     Trem *trem4;
     Trem *trem5;
+
+    pthread_mutex_t critic[7];
 };
 
 #endif // MAINWINDOW_H

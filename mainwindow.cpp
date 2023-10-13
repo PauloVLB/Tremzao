@@ -7,12 +7,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // inicializa os mutexes
+    for(int i = 0; i < 7; i++) {
+        pthread_mutex_init(&critic[i], NULL);
+    }
+
     //Cria o trem com seu (ID, posição X, posição Y)
-    trem1 = new Trem(1,20,170);
-    trem2 = new Trem(2,290,170);
-    trem3 = new Trem(3,560,170);
-    trem4 = new Trem(4,160,40);
-    trem5 = new Trem(5,430,40);
+    trem1 = new Trem(1,20,170, critic);
+    trem2 = new Trem(2,290,170, critic);
+    trem3 = new Trem(3,560,170, critic);
+    trem4 = new Trem(4,160,40, critic);
+    trem5 = new Trem(5,430,40, critic);
 
     /*
      * Conecta o sinal UPDATEGUI à função UPDATEINTERFACE.
@@ -61,29 +66,32 @@ void MainWindow::updateInterface(int id, int x, int y){
 MainWindow::~MainWindow()
 {
     delete ui;
+    for(int i = 0; i < 7; i++) {
+        pthread_mutex_destroy(&critic[i]);
+    }
 }
 
 void MainWindow::on_slider_t1_valueChanged(int value)
 {
-    trem1->velocidade = 250 - value;
+    trem1->velocidade = 220 - value;
 }
 
 void MainWindow::on_slider_t2_valueChanged(int value)
 {
-    trem2->velocidade = 250 - value;
+    trem2->velocidade = 220 - value;
 }
 
 void MainWindow::on_slider_t3_valueChanged(int value)
 {
-    trem3->velocidade = 250 - value;
+    trem3->velocidade = 220 - value;
 }
 
 void MainWindow::on_slider_t4_valueChanged(int value)
 {
-    trem4->velocidade = 250 - value;
+    trem4->velocidade = 220 - value;
 }
 
 void MainWindow::on_slider_t5_valueChanged(int value)
 {
-    trem5->velocidade = 250 - value;
+    trem5->velocidade = 220 - value;
 }
