@@ -55,15 +55,38 @@ void Trem::run(){
             break;
         case 2: //Trem 2
             if (y == 170 && x <560){
+                if(x == 310){
+                    unlock(5);
+                }
+                if(x == 410){
+                    lock(6);
+                    lock(3);
+                }
+                if(x == 450){
+                    unlock(2);
+                }
                 x+=10;
             }
             else if (x == 560 && y < 290) {
+                if(y == 190){
+                    unlock(3);
+                }
                 y+=10;
             }
             else if (x > 290 && y == 290) {
+                if(x == 310){
+                    lock(5);
+                }
+                if(x == 540){
+                    unlock(6);
+                }
                 x-=10;
             }
             else {
+                if(y == 190){
+                    lock(2);
+                    //lock(2);
+                }
                 y-=10;
             }
             emit updateGUI(ID, x,y);    //Emite um sinal
